@@ -26,12 +26,11 @@ export default class BaiTapGioHang extends Component {
       sanPhamChiTiet: sanPham,
     });
   };
-  handleThemSanPham = (sanPham) => {
+  handleThemGioHang = (sanPham) => {
     let cloneGioHang = [...this.state.gioHang];
     let indexSanPham = this.state.gioHang.findIndex((item) => {
       return item.maSP == sanPham.maSP;
     });
-    console.log(cloneGioHang, indexSanPham);
     if (indexSanPham == -1) {
       sanPham.soLuong = 1;
       cloneGioHang.push(sanPham);
@@ -42,28 +41,16 @@ export default class BaiTapGioHang extends Component {
       gioHang: cloneGioHang,
     });
   };
+
   render() {
     return (
       <div className=" container">
-        <div className="text-right">
-          <span
-            className="text-danger"
-            style={{ cursor: "pointer", fontSize: "20px", fontWeight: "bold" }}
-            data-toggle="modal"
-            data-target="#modelId"
-          >
-            Giỏ hàng (0)
-          </span>
-        </div>
         <div className="py-5">
-          <ModalGioHang
-            dataGioHang={this.state.gioHang}
-            // handleThayDoiSoLuong={this.handleThayDoiSoLuong}
-          />
+          <ModalGioHang dataGioHang={this.state.gioHang} />
           <DanhSachDienThoai
             dsdt={danhSachDienThoai}
             handleSanPhamChiTiet={this.handleSanPhamChiTiet}
-            handleThemGioHang={this.handleThemSanPham}
+            handleThemGioHang={this.handleThemGioHang}
           />
           <SanPhamChiTiet data={this.state.sanPhamChiTiet} />
         </div>

@@ -10,19 +10,36 @@ export default class ModalGioHang extends Component {
             <img style={{ width: "50px" }} src={item.hinhAnh} alt="" />
           </td>
           <td>{item.tenSP}</td>
-          <td>{item.soLuong}</td>
+          <td>
+            <button className="btn btn-success">+</button>
+            <span>{item.soLuong}</span>
+            <button className="btn btn-success">-</button>
+          </td>
           <td>{item.giaBan}</td>
           <td>{item.soLuong * item.giaBan}</td>
         </tr>
       );
     });
   };
-
+  renderTotalSanPham = () => {
+    return this.props.dataGioHang.reduce((a, b) => {
+      return a + b.soLuong;
+    }, 0);
+  };
   render() {
-    console.log("dataGioHang", this.props.dataGioHang);
-
     return (
       <div>
+        {" "}
+        <div className="text-right">
+          <span
+            className="text-danger"
+            style={{ cursor: "pointer", fontSize: "20px", fontWeight: "bold" }}
+            data-toggle="modal"
+            data-target="#modelId"
+          >
+            Giỏ hàng ({this.renderTotalSanPham()})
+          </span>
+        </div>
         <div
           className="modal fade"
           id="modelId"
